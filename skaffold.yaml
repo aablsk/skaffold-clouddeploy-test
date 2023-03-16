@@ -1,0 +1,8 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata: 
+  name: skaffold-clouddeploy-test
+requires:
+  - configs:
+    - kustomize
+    path: modules/kustomize/skaffold.yaml

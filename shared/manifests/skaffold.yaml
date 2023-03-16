@@ -1,0 +1,7 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata: 
+  name: namespace
+manifests:
+  rawYaml:
+    - namespace.yaml

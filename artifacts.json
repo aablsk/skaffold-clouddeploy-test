@@ -1,0 +1,8 @@
+{
+    "builds": [
+        {
+            "imageName": "hello",
+            "tag": "gcr.io/google-samples/hello-app:2.0@sha256:c4b0d869bd22cb3d1207848b385c389f7a4ab7a481184476ee7b98e7876ee594"
+        }
+    ]
+}
