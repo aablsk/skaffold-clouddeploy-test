@@ -23,4 +23,4 @@ profiles:
         name: verify-http-status-200
         image: google/cloud-sdk:latest
         command: ["bin/bash"]
-        args: ["-c", "gcloud container clusters get-credentials gke --region us-central1 --project skaffold-clouddeploy-test && if [[ $(curl http://$(kubectl get service kustomize-local -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]
+        args: ["-c", "gcloud container clusters get-credentials development --region us-central1 --project skaffold-clouddeploy-test && if [[ $(curl http://$(kubectl get service kustomize-local -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]
