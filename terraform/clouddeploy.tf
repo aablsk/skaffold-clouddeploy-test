@@ -62,7 +62,7 @@ resource "google_clouddeploy_delivery_pipeline" "delivery-pipeline" {
   name     = local.application_name
   serial_pipeline {
     stages {
-      profiles = ["kustomize-simple"]
+      profiles = [""]
       target_id = google_clouddeploy_target.gke.name
       strategy {
         standard {
