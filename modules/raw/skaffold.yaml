@@ -7,9 +7,8 @@ requires:
     - namespace
     path: ../../shared/manifests/skaffold.yaml
 manifests:
-  kustomize:
-    paths:
-    - k8s/base
+  rawYaml:
+    - k8s/base/*
   output: render/result.yaml # TODO: create bug - this does nothing
 test:
   - image: hello

@@ -2,6 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: raw
+  namespace: skaffold-clouddeploy-test
+  labels:
+    app: raw
 spec:
   replicas: 1
   template:

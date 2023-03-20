@@ -3,22 +3,6 @@ kind: Namespace
 metadata:
   name: skaffold-clouddeploy-test
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: raw
-  name: raw
-  namespace: skaffold-clouddeploy-test
-spec:
-  ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-  selector:
-    app: raw
-  type: LoadBalancer
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,13 +12,7 @@ metadata:
   namespace: skaffold-clouddeploy-test
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: raw
   template:
-    metadata:
-      labels:
-        app: raw
     spec:
       containers:
         - image: gcr.io/google-samples/hello-app:2.0@sha256:c4b0d869bd22cb3d1207848b385c389f7a4ab7a481184476ee7b98e7876ee594
@@ -47,3 +25,17 @@ spec:
               cpu: 100m
             requests:
               cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: raw
+  name: raw
+  namespace: skaffold-clouddeploy-test
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer

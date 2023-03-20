@@ -1,6 +1,0 @@
-commonLabels:
-  app: raw
-namespace: skaffold-clouddeploy-test
-resources:
-  - "deployment.yaml"
-  - "service.yaml"
