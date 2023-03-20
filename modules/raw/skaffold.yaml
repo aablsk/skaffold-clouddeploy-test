@@ -21,4 +21,4 @@ verify:
       name: verify-http-status-200-raw
       image: google/cloud-sdk:latest
       command: ["bin/bash"]
-      args: ["-c", "gcloud container clusters get-credentials development --region us-central1 --project skaffold-clouddeploy-test && if [[ $(curl http://$(kubectl get service raw -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]
+      args: ["-c", "gcloud container fleet memberships get-credentials gke-membership && if [[ $(curl http://$(kubectl get service raw -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]
