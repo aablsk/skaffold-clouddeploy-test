@@ -14,7 +14,7 @@ steps:
       - "deploy"
       - "releases"
       - "create"
-      - "$SHORT_SHA"
+      - "commit-$SHORT_SHA"
       - "--delivery-pipeline=skaffold-clouddeploy-test"
       - "--build-artifacts=/workspace/artifacts.json"
       - "--skaffold-file=/workspace/skaffold.yaml"
