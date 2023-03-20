@@ -18,7 +18,7 @@ resource "google_cloudbuild_trigger" "skaffold_cd_test" {
     }
   }
 
-  included_files = ["modules/**", "cloudbuild.yaml", "artifacts.json", "skaffold.yaml"]
+  included_files = ["**/**"]
   filename       = "cloudbuild.yaml"
   substitutions = {
     _PROFILES              = "kustomize-simple"
