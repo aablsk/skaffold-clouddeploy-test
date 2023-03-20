@@ -3,11 +3,10 @@ steps:
   - name: gcr.io/k8s-skaffold/skaffold:$_SKAFFOLD_VERSION
     id: render-tests
     args: 
-      - test 
-      - -p
-      - $_PROFILES
-      - -a
-      - artifacts.json
+      - "skaffold"
+      - "test"
+      - "-p=$_PROFILES"
+      - "-a=artifacts.json"
     timeout: 1200s
   - name: gcr.io/cloud-builders/gcloud
     id: trigger-release
