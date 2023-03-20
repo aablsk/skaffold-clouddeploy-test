@@ -26,11 +26,13 @@ module "project-iam-bindings" {
     "roles/monitoring.metricWriter" = [
       "serviceAccount:${google_service_account.gke_workload.email}",
       "serviceAccount:${google_service_account.cloud_deploy.email}",
+      "serviceAccount:${google_service_account.cloud_build.email}",
       "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     ],
     "roles/logging.logWriter" = [
       "serviceAccount:${google_service_account.gke_workload.email}",
       "serviceAccount:${google_service_account.cloud_deploy.email}",
+      "serviceAccount:${google_service_account.cloud_build.email}",
       "serviceAccount:${data.google_project.project.number}-compute@developer.gserviceaccount.com"
     ],
     "roles/container.developer" = [
@@ -42,5 +44,8 @@ module "project-iam-bindings" {
     "roles/gkehub.viewer" = [
       "serviceAccount:${google_service_account.cloud_deploy.email}"
     ],
+    "roles/clouddeploy.releaser" = [
+      "serviceAccount:${google_service_account.cloud_build.email}"
+    ]
   }
 }

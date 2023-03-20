@@ -28,6 +28,7 @@ module "gke" {
   name                    = "development"
   regional                = true
   region                  = var.region
+  zones                   = var.zones
   network                 = local.network_name
   subnetwork              = local.network.subnetwork
   ip_range_pods           = local.network.ip_range_pods

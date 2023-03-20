@@ -21,3 +21,23 @@ variable "region" {
     type = string
     description = "Region where regional resources will be deployed (e.g. europe-west1)"
 }
+
+variable "zones" {
+    type = list(string)
+    description = "Zones where GKE cluster will deploy nodes to"
+}
+
+variable "repo_name" {
+    type = string
+    description = "Short version of repository to use source for CI"
+}
+
+variable "repo_owner" {
+    type = string
+    description = "Github username of the github repo owner whose fork shall be used for CloudBuild triggers"
+}
+
+variable "repo_branch" {
+    type = string
+    description = "Branch to trigger pipelines from if pushed to."
+}

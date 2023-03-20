@@ -13,3 +13,8 @@
 # limitations under the License.
 project_id = "skaffold-clouddeploy-test"
 region = "us-central1"
+zones = ["us-central1-a", "us-central1-b", "us-central1-f"]
+
+repo_owner = "aablsk"
+repo_name = "skaffold-clouddeploy-test"
+repo_branch = "main"

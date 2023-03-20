@@ -1,5 +1,7 @@
 # Configuration
 
+1. Connect repository in CloudBuild
+
 1. Update terraform.tfvars
 
 # How to get cluster credentials:

@@ -1,0 +1,25 @@
+
+steps:
+  - name: gcr.io/k8s-skaffold/skaffold:$_SKAFFOLD_VERSION
+    id: render-tests
+    args: 
+      - test 
+      - -p
+      - $_PROFILES
+      - -a
+      - artifacts.json
+    timeout: 1200s
+  - name: gcr.io/cloud-builders/gcloud
+    id: trigger-release
+    args: 
+      - "deploy"
+      - "releases"
+      - "create"
+      - "$SHORT_SHA"
+      - "--delivery-pipeline=skaffold-clouddeploy-test"
+      - "--build-artifacts=/workspace/artifacts.json"
+      - "--skaffold-file=/workspace/skaffold.yaml"
+      - "--region=$LOCATION"
+      - "--skaffold-version=skaffold_preview"
+options:
+  logging: CLOUD_LOGGING_ONLY
