@@ -46,6 +46,10 @@ module "project-iam-bindings" {
     ],
     "roles/clouddeploy.releaser" = [
       "serviceAccount:${google_service_account.cloud_build.email}"
+    ],
+    "roles/storage.admin" = [ # TODO: this is lazy
+      "serviceAccount:${google_service_account.cloud_build.email}", 
+      "serviceAccount:${google_service_account.cloud_deploy.email}"
     ]
   }
 }

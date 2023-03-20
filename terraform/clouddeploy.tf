@@ -74,3 +74,10 @@ resource "google_clouddeploy_delivery_pipeline" "delivery-pipeline" {
   provider = google-beta
 }
 
+# give CloudDeploy SA access to read from source staging bucket
+resource "google_storage_bucket_iam_member" "release_source_staging_objectViewer" {
+  bucket  = google_storage_bucket.release_source_staging.name
+
+  member = "serviceAccount:${google_service_account.cloud_deploy.email}"
+  role   = "roles/storage.objectViewer"
+}
