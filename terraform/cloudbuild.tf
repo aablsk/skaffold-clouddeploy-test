@@ -22,7 +22,7 @@ resource "google_cloudbuild_trigger" "skaffold_cd_test" {
   filename       = "cloudbuild.yaml"
   substitutions = {
     _PROFILES              = "kustomize-simple"
-    _SKAFFOLD_VERSION      = "2.2.0"
+    _SKAFFOLD_VERSION      = "v2.2.0"
   }
   service_account = google_service_account.cloud_build.id
 }
