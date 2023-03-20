@@ -21,7 +21,6 @@ resource "google_cloudbuild_trigger" "skaffold_cd_test" {
   included_files = ["**/**"]
   filename       = "cloudbuild.yaml"
   substitutions = {
-    _PROFILES              = "kustomize-simple"
     _SKAFFOLD_VERSION      = "v2.2.0"
     _SOURCE_STAGING_BUCKET = "gs://${google_storage_bucket.release_source_staging.name}"
   }

@@ -5,7 +5,6 @@ steps:
     args: 
       - "skaffold"
       - "test"
-      - "-p=$_PROFILES"
       - "-a=artifacts.json"
     timeout: 1200s
   - name: gcr.io/cloud-builders/gcloud

@@ -1,0 +1,24 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: raw
+requires:
+  - configs:
+    - namespace
+    path: ../../shared/manifests/skaffold.yaml
+manifests:
+  kustomize:
+    paths:
+    - k8s/base
+  output: render/result.yaml # TODO: create bug - this does nothing
+test:
+  - image: hello
+    custom:
+    - command: /bin/bash -c "echo Testing module raw && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)"
+verify:
+  - name: verify-raw
+    container:
+      name: verify-http-status-200-raw
+      image: google/cloud-sdk:latest
+      command: ["bin/bash"]
+      args: ["-c", "gcloud container clusters get-credentials development --region us-central1 --project skaffold-clouddeploy-test && if [[ $(curl http://$(kubectl get service raw -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]

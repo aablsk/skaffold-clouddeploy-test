@@ -6,3 +6,6 @@ requires:
   - configs:
     - kustomize
     path: modules/kustomize/skaffold.yaml
+  - configs:
+    - raw
+    path: modules/raw/skaffold.yaml
