@@ -1,7 +1,6 @@
 # What's the purpose of this?
 This repository contains an integration test to validate new skaffold versions for use in Cloud Deploy using a more complex configuration.
 
-## How does it work?
 Cloud Deploy uses `skaffold render` to render kubernetes manifests supporting a number of renderers, `skaffold apply` to apply the rendered manifests to a cluster and `skaffold verify` to run verification tests against the deployed workloads.
 This repository aims to test these skaffold commands against regressions and unexpected behavior.
 
@@ -17,12 +16,12 @@ The modules only include `manifests`, `test` and `verify` configuration to keep 
 ## Validate skaffold render
 `skaffold render` supports many renderers. For each renderer a skaffold configuration and a `golden_render.yaml` file with the expected output of `skaffold render -a artifacts.json` is provided. The actual execution of rendering the manifests and comparing them with the `golden_render.yaml` is implemented using `skaffold test -a artifacts.json`. *(skaffold-ception)*
 
-## Execute locally
+### Execute locally
 Run `skaffold test -a artifacts.json` from the repository root to run rendering tests for all modules imported in the repository root `skaffold.yaml`.
 
 Run `skaffold test -a artifacts.json -m $MODULE_NAME` from the repository root to run rendering tests for a specific module imported in the repository root `skaffold.yaml`.
 
-## Execute remotely in Cloud Build
+### Execute remotely in Cloud Build
 The repositories infrastructure contains a Cloud Build pipeline to trigger a pipeline that runs `skaffold test -a artifacts.json` within a `gcr.io/k8s-skaffold/skaffold:$_SKAFFOLD_VERSION` container followed by executing `skaffold test -a artifacts.json` in a `us-central1-docker.pkg.dev/cd-image-prod/cd-image/cd@sha256:$_CD_IMAGE_HASH` container. *`$_SKAFFOLD_VERSION` and `$_CD_IMAGE_HASH` are Cloud Build substitutions and can be injected when triggering the pipeline manually.* 
 
 After successfully passing these tests, the pipeline creates a Cloud Deploy release.
