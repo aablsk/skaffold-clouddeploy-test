@@ -5,7 +5,7 @@ metadata:
 requires:
   - configs:
     - namespace
-    path: ../../shared/manifests/skaffold.yaml
+    path: ../../shared/namespace/skaffold.yaml
 manifests:
   kustomize:
     paths:
