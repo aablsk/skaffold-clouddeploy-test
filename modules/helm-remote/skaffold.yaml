@@ -1,0 +1,31 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: helm-remote
+requires:
+  - configs:
+    - namespace
+    path: ../../shared/manifests/skaffold.yaml
+manifests:
+  helm: 
+    releases:
+    - name: helm-remote
+      remoteChart: https://github.com/aablsk/skaffold-clouddeploy-test/blob/main/modules/helm-local/packaged/helm-local-0.1.0.tgz?raw=true
+      version: 0.1.0
+      valuesFiles: 
+        - helm/values.yaml
+      setValues:
+        namespace: skaffold-clouddeploy-test
+      setValueTemplates:
+        image: "{{.IMAGE_FULLY_QUALIFIED_hello}}"
+test:
+  - image: hello
+    custom:
+    - command: /bin/bash -c "echo Testing module helm-remote && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)" 
+verify:
+- name: verify-helm-remote
+  container:
+    name: verify-http-status-200-helm-remote
+    image: google/cloud-sdk:latest
+    command: ["bin/bash"]
+    args: ["-c", "gcloud container fleet memberships get-credentials gke-membership && if [[ $(curl http://$(kubectl get service helm-local -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]

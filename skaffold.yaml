@@ -12,6 +12,9 @@ requires:
   - configs:
     - helm-local
     path: modules/helm-local/skaffold.yaml
+  - configs:
+    - helm-remote
+    path: modules/helm-remote/skaffold.yaml
   ## temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render as docker client in container image is outdated: Step #0 - "render-tests": - stderr: "Package \"base\": \n[RUNNING] \"gcr.io/kpt-fn/set-namespace:v0.4.1\"\n[FAIL] \"gcr.io/kpt-fn/set-namespace:v0.4.1\" in 400ms\nError: docker client version must be v20.10.0 or greater: found invalid version v19.03.13 \n"
   ## temporarily disabled below as us-central1-docker.pkg.dev/cd-image-prod/cd-image/cd@sha256:b8473dd92df8130a8833ca0aa00585c42682076f367f44b0972a518a9dc110ae fails to render as docker client in container image is outdated: Step #0 - "render-tests": - stderr: "Package \"base\": \n[RUNNING] \"gcr.io/kpt-fn/set-namespace:v0.4.1\"\n[FAIL] \"gcr.io/kpt-fn/set-namespace:v0.4.1\" in 400ms\nError: docker client version must be v20.10.0 or greater: found invalid version v19.03.13 \n"
   # - configs:
