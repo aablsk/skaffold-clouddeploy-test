@@ -23,6 +23,7 @@ resource "google_cloudbuild_trigger" "skaffold_cd_test" {
   substitutions = {
     _SKAFFOLD_VERSION      = "v2.2.0"
     _SOURCE_STAGING_BUCKET = "gs://${google_storage_bucket.release_source_staging.name}"
+    _CD_IMAGE_HASH         = "b8473dd92df8130a8833ca0aa00585c42682076f367f44b0972a518a9dc110ae"
   }
   service_account = google_service_account.cloud_build.id
 }

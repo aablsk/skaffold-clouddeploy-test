@@ -1,11 +1,20 @@
 
 steps:
   - name: gcr.io/k8s-skaffold/skaffold:$_SKAFFOLD_VERSION
-    id: render-tests
+    id: render-tests-skaffold-image
+    allowFailure: true
     args: 
       - "skaffold"
       - "test"
       - "-a=artifacts.json"
+    timeout: 1200s
+  - name: us-central1-docker.pkg.dev/cd-image-prod/cd-image/cd@sha256:$_CD_IMAGE_HASH
+    id: render-tests-cd-image
+    entrypoint: /bin/bash
+    args: 
+    - "-c"
+    - | 
+      skaffold test -a=artifacts.json
     timeout: 1200s
   - name: gcr.io/cloud-builders/gcloud
     id: trigger-release
