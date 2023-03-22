@@ -9,13 +9,16 @@ requires:
   - configs:
     - raw
     path: modules/raw/skaffold.yaml
+  - configs:
+    - helm-local
+    path: modules/helm-local/skaffold.yaml
 
-  # temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render as docker client in container image is outdated: Step #0 - "render-tests": - stderr: "Package \"base\": \n[RUNNING] \"gcr.io/kpt-fn/set-namespace:v0.4.1\"\n[FAIL] \"gcr.io/kpt-fn/set-namespace:v0.4.1\" in 400ms\nError: docker client version must be v20.10.0 or greater: found invalid version v19.03.13 \n"
-  # - configs:
-  #   - kpt
-  #   path: modules/kpt/skaffold.yaml
+  #temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render as docker client in container image is outdated: Step #0 - "render-tests": - stderr: "Package \"base\": \n[RUNNING] \"gcr.io/kpt-fn/set-namespace:v0.4.1\"\n[FAIL] \"gcr.io/kpt-fn/set-namespace:v0.4.1\" in 400ms\nError: docker client version must be v20.10.0 or greater: found invalid version v19.03.13 \n"
+  - configs:
+    - kpt
+    path: modules/kpt/skaffold.yaml
 
-  # temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render with status code 1, whereas the binary from https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 works
-  # - configs:
-  #   - manifests-transform
-  #   path: modules/manifests-transform/skaffold.yaml
+  #temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render with status code 1, whereas the binary from https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 works
+  - configs:
+    - manifests-transform
+    path: modules/manifests-transform/skaffold.yaml

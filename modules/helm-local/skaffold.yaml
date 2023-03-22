@@ -1,0 +1,28 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: helm-local
+requires:
+  - configs:
+    - namespace
+    path: ../../shared/manifests/skaffold.yaml
+manifests:
+  helm: 
+    releases:
+    - name: helm-local
+      chartPath: helm
+      setValues:
+        namespace: skaffold-clouddeploy-test
+      setValueTemplates:
+        image: "{{.IMAGE_FULLY_QUALIFIED_hello}}"
+test:
+  - image: hello
+    custom:
+    - command: /bin/bash -c "echo Testing module helm-local && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)" 
+verify:
+- name: verify-helm-local
+  container:
+    name: verify-http-status-200-helm-local
+    image: google/cloud-sdk:latest
+    command: ["bin/bash"]
+    args: ["-c", "gcloud container fleet memberships get-credentials gke-membership && if [[ $(curl http://$(kubectl get service helm-local -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]
