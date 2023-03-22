@@ -9,7 +9,7 @@ requires:
 manifests:
   rawYaml:
     - k8s/base/*
-  transform:
+  transform: # TODO: create Bug this render breaks within gcr.io/k8s-skaffold/skaffold:v2.2.0 image!
     - name: set-labels
       configMap:
         - "app:manifests-transform"
@@ -31,12 +31,12 @@ manifests:
     #   configMap:
     #     - "namespace:asdf"
   validate:
-    - name: kubeval
+   - name: kubeval
   output: render/result.yaml # TODO: create bug - this does nothing
 test:
   - image: hello
     custom:
-    - command: /bin/bash -c "echo Testing module manifests-transform && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)"
+    - command: /bin/bash -c "echo Testing module manifests-transform && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)" 
 verify:
 - name: verify-manifests-transform
   container:

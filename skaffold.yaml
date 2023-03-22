@@ -10,5 +10,9 @@ requires:
     - raw
     path: modules/raw/skaffold.yaml
   - configs:
-    - manifests-transform
-    path: modules/manifests-transform/skaffold.yaml
+    - kpt
+    path: modules/kpt/skaffold.yaml
+  # temporarily disabled below as gcr.io/k8s-skaffold/skaffold:v2.2.0 fails to render, whereas the binary from https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 works
+  # - configs:
+  #   - manifests-transform
+  #   path: modules/manifests-transform/skaffold.yaml

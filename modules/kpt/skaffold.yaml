@@ -1,0 +1,22 @@
+apiVersion: skaffold/v4beta1
+kind: Config
+metadata:
+  name: kpt
+requires:
+  - configs:
+    - namespace
+    path: ../../shared/manifests/skaffold.yaml
+manifests:
+  kpt: 
+  - k8s/base
+test:
+  - image: hello
+    custom:
+    - command: /bin/bash -c "echo Testing module kpt && diff golden_render.yaml <(skaffold render -a ../../artifacts.json)" 
+verify:
+- name: verify-kpt
+  container:
+    name: verify-http-status-200-kpt
+    image: google/cloud-sdk:latest
+    command: ["bin/bash"]
+    args: ["-c", "gcloud container fleet memberships get-credentials gke-membership && if [[ $(curl http://$(kubectl get service kpt -n skaffold-clouddeploy-test -o jsonpath='{.status.loadBalancer.ingress[0].ip}') --write-out '%{http_code}'  --silent --head --output /dev/null) -ne '200' ]]; then exit 1; fi"]

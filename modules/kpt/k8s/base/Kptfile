@@ -1,0 +1,20 @@
+apiVersion: kpt.dev/v1
+kind: Kptfile
+metadata:
+  name: skaffold-clouddeploy-test-kpt
+pipeline:
+  mutators:
+    - image: gcr.io/kpt-fn/set-namespace:v0.4.1
+      configMap:
+        namespace: skaffold-clouddeploy-test  
+    - image: gcr.io/kpt-fn/create-setters:v0.1.0
+      configMap:
+        name: kustomize
+    - image: gcr.io/kpt-fn/apply-setters:v0.2.0
+      configMap:
+        name: kpt
+    - image: gcr.io/kpt-fn/set-labels:v0.2.0
+      configMap:
+        app: kpt
+  validators:
+    - image: gcr.io/kpt-fn/kubeval:v0.3.0

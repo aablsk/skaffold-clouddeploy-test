@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kustomize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustomize
+  template:
+    metadata:
+      labels:
+        app: kustomize
+    spec:
+      containers:
+      - name: hello
+        image: hello
+        resources:
+          requests:
+            cpu: "100m"
+          limits:
+            cpu: "100m"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
