@@ -20,12 +20,12 @@ manifests:
       configMap:
         - "name:manifests-transform"
     # TODO: create bug - this exits with exitcode 1 -> namespace setting with transform seems to be broken
-    - name: create-setters
-      configMap:
-        - "namespace:skaffold-clouddeploy-test"
-    - name: apply-setters
-      configMap:
-        - "namespace:asdf"
+    # - name: create-setters
+    #   configMap:
+    #     - "namespace:skaffold-clouddeploy-test"
+    # - name: apply-setters
+    #   configMap:
+    #     - "namespace:asdf"
     # TODO: create bug - this exits with exitcode 1 -> namespace setting with transform seems to be broken
     - name: set-namespace 
       configMap:
