@@ -9,7 +9,7 @@ requires:
 manifests:
   rawYaml:
     - k8s/base/*
-  transform: # TODO: create Bug this render breaks within gcr.io/k8s-skaffold/skaffold:v2.2.0 image!
+  transform:
     - name: set-labels
       configMap:
         - "app:manifests-transform"
@@ -19,20 +19,20 @@ manifests:
     - name: apply-setters
       configMap:
         - "name:manifests-transform"
-    # TODO: create bug - this exits with exitcode 1 -> namespace setting with transform seems to be broken
+    # Issue: https://github.com/GoogleContainerTools/skaffold/issues/8580
     # - name: create-setters
     #   configMap:
     #     - "namespace:skaffold-clouddeploy-test"
     # - name: apply-setters
     #   configMap:
     #     - "namespace:asdf"
-    # TODO: create bug - this exits with exitcode 1 -> namespace setting with transform seems to be broken
+    # Issue: https://github.com/GoogleContainerTools/skaffold/issues/8580
     # - name: set-namespace 
     #   configMap:
     #     - "namespace:asdf"
   validate:
    - name: kubeval
-  output: render/result.yaml # TODO: create bug - this does nothing
+  output: render/result.yaml # Issue: https://github.com/GoogleContainerTools/skaffold/issues/8581
 test:
   - image: hello
     custom:
